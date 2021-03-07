@@ -7,3 +7,4 @@ edition = "2018"
 [dependencies]
 rusoto_core = "~0.46.0"
 rusoto_credential = "~0.46.0"
+tokio = "~1.2.0"
