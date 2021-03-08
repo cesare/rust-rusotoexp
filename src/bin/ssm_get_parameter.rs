@@ -12,7 +12,7 @@ struct Options {
 }
 
 #[tokio::main]
-async fn main() -> Result<(), Box<dyn std::error::Error>> {
+async fn main() -> Result<()> {
     let options = Options::from_args();
 
     let region = Region::default();
