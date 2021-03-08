@@ -5,6 +5,7 @@ authors = ["SAWADA Tadashi <cesare@mayverse.jp>"]
 edition = "2018"
 
 [dependencies]
+anyhow = "~1.0.38"
 rusoto_core = "~0.46.0"
 rusoto_credential = "~0.46.0"
 rusoto_ssm = "~0.46.0"
