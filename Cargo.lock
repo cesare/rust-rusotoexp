@@ -877,6 +877,7 @@ name = "rusotoexp"
 version = "0.1.0"
 dependencies = [
  "anyhow",
+ "futures",
  "rusoto_core",
  "rusoto_credential",
  "rusoto_s3",
