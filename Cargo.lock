@@ -920,6 +920,7 @@ name = "rusotoexp"
 version = "0.1.0"
 dependencies = [
  "anyhow",
+ "bytes",
  "futures",
  "rusoto_core",
  "rusoto_credential",
