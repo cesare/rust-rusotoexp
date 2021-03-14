@@ -926,6 +926,7 @@ dependencies = [
  "rusoto_s3",
  "rusoto_ssm",
  "structopt",
+ "tempfile",
  "tokio",
 ]
 
