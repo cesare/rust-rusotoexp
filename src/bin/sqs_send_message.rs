@@ -5,7 +5,7 @@ use structopt::StructOpt;
 use tokio;
 
 #[derive(StructOpt, Debug)]
-#[structopt(name = "sqs_receive_message")]
+#[structopt(name = "sqs_send_message")]
 struct Options {
     #[structopt(short, long)]
     queue_url: String,

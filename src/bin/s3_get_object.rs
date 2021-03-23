@@ -10,7 +10,7 @@ use tokio::io::AsyncWriteExt;
 use std::path::PathBuf;
 
 #[derive(StructOpt, Debug)]
-#[structopt(name = "s3_list_objects")]
+#[structopt(name = "s3_get_object")]
 struct Options {
     #[structopt(short, long)]
     bucket: String,
