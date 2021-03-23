@@ -32,10 +32,7 @@ impl Options {
     }
 }
 
-#[tokio::main]
-async fn main() -> Result<()> {
-    let options = Options::from_args();
-
+async fn wait_for_messages(options: &Options) -> Result<()> {
     let region = Region::default();
     let client = SqsClient::new(region);
     let request = options.create_request();
@@ -53,4 +50,12 @@ async fn main() -> Result<()> {
     }
 
     Ok(())
+}
+
+#[tokio::main]
+async fn main() -> Result<()> {
+    let options = Options::from_args();
+    loop {
+        wait_for_messages(&options).await?;
+    }
 }
