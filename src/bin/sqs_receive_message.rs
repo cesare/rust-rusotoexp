@@ -12,6 +12,11 @@ struct Options {
 }
 
 impl Options {
+    fn create_sqs_client(&self) -> SqsClient {
+        let region = self.region();
+        SqsClient::new(region)
+    }
+
     fn create_request(&self) -> ReceiveMessageRequest {
         ReceiveMessageRequest {
             attribute_names: None,
@@ -23,11 +28,14 @@ impl Options {
             wait_time_seconds: Some(20),
         }
     }
+
+    fn region(&self) -> Region {
+        Region::default()
+    }
 }
 
 async fn delete_message(options: &Options, receipt_handle: &str) -> Result<()> {
-    let region = Region::default();
-    let client = SqsClient::new(region);
+    let client = options.create_sqs_client();
     let request = DeleteMessageRequest {
         queue_url: options.queue_url.to_owned(),
         receipt_handle: receipt_handle.to_owned(),
@@ -37,8 +45,7 @@ async fn delete_message(options: &Options, receipt_handle: &str) -> Result<()> {
 }
 
 async fn wait_for_messages(options: &Options) -> Result<()> {
-    let region = Region::default();
-    let client = SqsClient::new(region);
+    let client = options.create_sqs_client();
     let request = options.create_request();
     let results = client.receive_message(request).await?;
 
