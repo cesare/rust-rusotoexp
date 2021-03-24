@@ -23,13 +23,17 @@ impl Options {
             wait_time_seconds: Some(20),
         }
     }
+}
 
-    fn create_delete_message_request(&self, receipt_handle: &str) -> DeleteMessageRequest {
-        DeleteMessageRequest {
-            queue_url: self.queue_url.to_owned(),
-            receipt_handle: receipt_handle.to_owned(),
-        }
-    }
+async fn delete_message(options: &Options, receipt_handle: &str) -> Result<()> {
+    let region = Region::default();
+    let client = SqsClient::new(region);
+    let request = DeleteMessageRequest {
+        queue_url: options.queue_url.to_owned(),
+        receipt_handle: receipt_handle.to_owned(),
+    };
+    client.delete_message(request).await?;
+    Ok(())
 }
 
 async fn wait_for_messages(options: &Options) -> Result<()> {
@@ -43,8 +47,7 @@ async fn wait_for_messages(options: &Options) -> Result<()> {
             println!("{:?}", message);
 
             if let Some(receipt_handle) = message.receipt_handle {
-                let request = options.create_delete_message_request(&receipt_handle);
-                client.delete_message(request).await?;
+                delete_message(&options, &receipt_handle).await?;
             }
         }
     }
