@@ -30,7 +30,11 @@ impl Options {
 
 fn show_object(object: &Object) {
     if let Some(key) = &object.key {
-        if let Some(Ok(last_modified)) = object.last_modified.as_ref().map(|dt| chrono::DateTime::parse_from_rfc3339(dt)) {
+        if let Some(Ok(last_modified)) = object
+            .last_modified
+            .as_ref()
+            .map(|dt| chrono::DateTime::parse_from_rfc3339(dt))
+        {
             println!("{} {}", last_modified, key);
         }
     }
